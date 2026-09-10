@@ -1,0 +1,12 @@
+{
+  "lsp": {
+    "gopls": {
+      "binary": {
+        "env": {
+          "GOROOT": "/Users/shay/Library/Caches/tinygo/goroot-dbed4b0f656e7cd92119c0449034866ec8574a8a75d0b86b1f6c92d2c1b6a8a9",
+          "GOFLAGS": "-tags=tinygo.riscv,baremetal,linux,arm,tinygo.riscv32,esp32c3,esp,espradio,xiao_esp32c3,tinygo,purego,osusergo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb,tinygo.unicore"
+        }
+      }
+    }
+  }
+}
