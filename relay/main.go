@@ -17,19 +17,25 @@ type PlantStatus struct {
 	Status string
 }
 
+func requireEnv(name string) string {
+	value := os.Getenv(name)
+	if value == "" {
+		log.Fatalf("Error: %s not set", name)
+	}
+	return value
+}
+
 // Relay plant status to Telegram.
 // Listens on HTTP on purpose.
 // Example request:
 // GET /notify?plant=front-porch-mint&status=thirsty&secret=...
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// This is optional just for devenvs.
+	_ = godotenv.Load()
 
-	token := os.Getenv("TELEGRAM_BOT_TOKEN")
-	chatID := os.Getenv("TELEGRAM_CHAT_ID")
-	secret := os.Getenv("PLANT_SECRET")
+	token := requireEnv("TELEGRAM_BOT_TOKEN")
+	chatID := requireEnv("TELEGRAM_CHAT_ID")
+	secret := requireEnv("PLANT_SECRET")
 
 	http.HandleFunc("/notify", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("secret") != secret {
